@@ -14,11 +14,7 @@ ENV NPM_REGISTRY=https://registry.npmmirror.com
 
 # Update the system, install Node.js, crontab, ping, vim, curl, git and other basic tools
 RUN yum update -y && \
-    yum install -y epel-release && \
-    curl --silent --location https://rpm.nodesource.com/setup_${NODE_VERSION} | bash - && \
-    yum install -y nodejs cronie iputils vim curl git && \
-    yum clean all && \
-    rm -rf /var/cache/yum
+    yum install -y epel-release
 
 # Set the npm registry and install ts-node globally
 RUN npm config set registry ${NPM_REGISTRY} && \
