@@ -6,8 +6,9 @@ ENV NODE_VERSION=20.x
 ENV NPM_REGISTRY=https://registry.npmmirror.com
 
 # Replace the default CentOS mirrors with the Aliyun mirrors
-RUN echo -e "[base]\nname=CentOS-\$releasever - Base\nmirrorlist=http://mirrors.aliyun.com/mirrorlist?repo=centos-\$releasever&arch=\$basearch&protocol=http\nenabled=1\ngpgcheck=1\ngpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-Official\n\n[updates]\nname=CentOS-\$releasever - Updates\nmirrorlist=http://mirrors.aliyun.com/mirrorlist?repo=centos-\$releasever-updates&arch=\$basearch&protocol=http\nenabled=1\ngpgcheck=1\ngpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-Official" > /etc/yum.repos.d/CentOS-Base.repo
-
+RUN curl -o /etc/yum.repos.d/Centos-8.repo http://mirrors.aliyun.com/repo/Centos-8.repo && \
+    rm -f /etc/yum.repos.d/CentOS-Linux-BaseOS.repo /etc/yum.repos.d/CentOS-Linux-AppStream.repo /etc/yum.repos.d/CentOS-Linux-Extras.repo /etc/yum.repos.d/CentOS-Linux-PowerTools.repo
+    
 # Update the system, install Node.js, crontab, ping, vim, curl, git and other basic tools
 RUN yum update -y && \
     yum install -y epel-release && \
