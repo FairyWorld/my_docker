@@ -27,16 +27,9 @@ RUN yum install -y epel-release && \
     # yum clean all && \
     # rm -rf /var/cache/yum
 
-# 启动crond服务, 设置开启自启动crond
-RUN systemctl start crond && \
-    systemctl enable crond
-
 # 设置npm镜像
 RUN npm config set registry ${NPM_REGISTRY} && \
     npm install -g ts-node
-
-# 设置终端进入的目录
-# WORKDIR /root
 
 # Start the bash terminal
 CMD ["/bin/bash"]
